@@ -1,0 +1,9 @@
+:host {
+	@apply inline-flex;
+}
+
+div.app-measure {
+	@apply relative inline-flex flex-col pl-2 pr-2;
+	@apply font-bold opacity-50;
+	color: var(--color-measure, #fff);
+}

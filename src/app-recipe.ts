@@ -1,11 +1,15 @@
-import {define, html, Hybrids} from 'hybrids'
+import {define, html, Hybrids, store} from 'hybrids'
 import styles from './app-recipe.css'
 import AppRecipeDirection from './app-recipe-direction'
 import {Element} from './main'
+import { PantryStore } from './store';
 
 const AppRecipe: Hybrids<Element> = {
 	recipe: {},
-	render: ({recipe}) => html`<article class="recipe">
+	pantry: store(PantryStore),
+	stock: ({pantry, recipe}) => recipe.ingredients.map(({iid}) => pantry.stock(iid)),
+	render: ({recipe, stock}) => html`<article class="recipe">
+		${JSON.stringify(stock)}
 		<h1>${recipe.name}</h1>
 		<p>${recipe.description}</p>
 		<hr>
@@ -14,10 +18,7 @@ const AppRecipe: Hybrids<Element> = {
 			${recipe.ingredients.map((i) => html`<li>
 				<app-ingredient id="${i.iid}"
 					name="${i.name}">
-					<app-measure qty="${i.qty}" unit="${i.unit}"
-						multiplier="1"
-						variable="${i.variable}">
-					</app-measure>
+					<app-qty qty="${i.qty}"></app-qty>
 				</app-ingredient>
 			</li>`)}
 		</ul>

@@ -1,5 +1,6 @@
-import {define, html, Hybrids, render} from 'hybrids'
+import {define, html, Hybrids} from 'hybrids'
 import {Element} from './main'
+import {DOM} from './utilities'
 
 /**
  * Parses tokens from recipe directions. Supports taxonomic ingredient ids and fractional modifiers.
@@ -7,37 +8,32 @@ import {Element} from './main'
  */
 const tokenizer = /\$\{(?:([\w\.]+)(?:\:([\d\.]+)?)?)\}/g
 
-const inject = (str, obj) => str.replace(/\${(.*?)}/g, (x ,g)=> obj[g]);
-
-// function parsed(host, target) {
-// 	let match
-// 	let measures = {}
-// 	while(match = tokenizer.exec(host.text)) {
-// 		const ingredient = host.ingredients.find((i) => i.iid === match[1])
-// 		const qty = ingredient.qty / (match[2] ? parseFloat(match[2]) : 1)
-// 		measures[match[1]] = renderIngredient(ingredient, qty)
-// 	}
-// 	console.log(host.text, measures)
-// 	return renderHtml(host.text, measures)
-// }
-
-function renderIngredients(host, node) {
+function parseIngredients(host, node) {
+	let next = node
 	if(node.nodeType === node.TEXT_NODE) {
+		let replacements = []
 		let match
-		console.log(tokenizer.exec(node))
-		while(match = tokenizer.exec(node)) {
-			const ingredient = host.ingredients.find((i) => i.iid === match[1])
-			const [pre, suf] = node.split(match[0])
-			const el: Element = document.createElement('app-ingredient')
-			el.id = ingredient.id
-			el.name = ingredient.name
+		let text = node.textContent
+		while(match = tokenizer.exec(node.textContent)) {
+			const [prefix, suffix] = text.split(match[0]).map((text) => document.createTextNode(text))
+			
+			let data = host.ingredients.find((i) => i.iid === match[1])
+			if(match[2]) {
+				data = {...data, frac: parseFloat(match[2])}
+			}
+			const ingredient: Element = DOM('app-ingredient', {...data}, [
+				DOM('app-measure', {...data})
+			])
 
-			node.appendChild(pre)
-			node.appendChild(el)
-			node.appendChild(suf)
+			replacements.pop()
+			replacements.push(prefix, ingredient, suffix)
+
+			text = suffix.textContent
 		}
+
+		replacements.length && node.replaceWith(...replacements)
 	}
-	node.childNodes?.forEach((node) => renderIngredients(host, node))
+	next.childNodes?.forEach((node) => parseIngredients(host, node))
 }
 
 const AppRecipeDirection: Hybrids<Element> = {
@@ -46,7 +42,7 @@ const AppRecipeDirection: Hybrids<Element> = {
 	render: ({text}) => html`<span>${text}</span>`,
 	root: {
 		get: ({render}) => render(),
-		observe: renderIngredients,
+		observe: parseIngredients,
 	},
 }
 
