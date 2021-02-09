@@ -1,11 +1,12 @@
 import {store} from 'hybrids'
 import {produce} from 'immer'
 import {recipes} from './recipe'
+import {parseRecipe} from './domain'
 import QTY from 'js-quantities'
 
 type Option<T> = T | null
 
-interface Qty {
+export interface Qty {
 	scalar: number,
 	baseScalar: number,
 	isBase: boolean,
@@ -13,7 +14,7 @@ interface Qty {
 	[key: string]: any,
 }
 
-function Qty(qty: number | string, unit?: string): Qty {
+export function Qty(qty: number | string, unit?: string): Qty {
 	return (typeof qty === 'string') ? QTY.parse(qty) : new QTY(qty, unit)
 }
 
@@ -22,10 +23,9 @@ interface Stock extends Qty {iid: string}
 const regexWord = /\w+/g
 
 export const PantryStore = {
-	recipes,
+	recipes: recipes.map((r) => parseRecipe(r)),
 	selectedRecipe: ({recipes}) => (i) => recipes[i],
 	stock: ({pantry}) => (iid: string): Option<Stock> => {
-		let story
 		let node = pantry
 		let stock
 		let match

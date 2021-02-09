@@ -7,7 +7,7 @@ import styles from './app-qty.css'
 const AppQty: Hybrids<Element> = {
 	qty: property(Qty.parse('1 meter')),
 	render: ({qty}) => html`
-		<small class="app-qty">${qty.toString()}</small>
+		<small class="app-qty">${qty.scalar} ${qty._units}</small>
 	`.style(styles)
 }
 

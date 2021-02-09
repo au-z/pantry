@@ -1,13 +1,13 @@
 import AppMain from './app-main'
 import AppRecipe from './app-recipe'
 import AppIngredient from './app-ingredient'
-import AppMeasure from './app-measure'
+import AppQty from './app-qty'
 
 const components = {
 	AppMain,
 	AppRecipe,
 	AppIngredient,
-	AppMeasure,
+	AppQty,
 }
 
 export interface Element extends HTMLElement {

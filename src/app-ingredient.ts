@@ -1,7 +1,6 @@
 import {children, define, html, Hybrids} from 'hybrids'
 import {Element} from './main'
 import styles from './app-ingredient.css'
-import AppMeasure from './app-qty'
 
 function updateMeasure(host, e) {
 	host.frac = e.detail.frac

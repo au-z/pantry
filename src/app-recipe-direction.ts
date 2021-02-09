@@ -1,6 +1,8 @@
 import {define, html, Hybrids} from 'hybrids'
 import {Element} from './main'
 import {DOM} from './utilities'
+import AppIngredient from './app-ingredient'
+import AppQty from './app-qty'
 
 /**
  * Parses tokens from recipe directions. Supports taxonomic ingredient ids and fractional modifiers.
@@ -22,7 +24,7 @@ function parseIngredients(host, node) {
 				data = {...data, frac: parseFloat(match[2])}
 			}
 			const ingredient: Element = DOM('app-ingredient', {...data}, [
-				DOM('app-measure', {...data})
+				DOM('app-qty', {...data})
 			])
 
 			replacements.pop()
@@ -39,7 +41,7 @@ function parseIngredients(host, node) {
 const AppRecipeDirection: Hybrids<Element> = {
 	text: '',
 	ingredients: [],
-	render: ({text}) => html`<span>${text}</span>`,
+	render: ({text}) => html`<span>${text}</span>`.define({AppIngredient, AppQty}),
 	root: {
 		get: ({render}) => render(),
 		observe: parseIngredients,
