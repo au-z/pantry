@@ -1,4 +1,4 @@
-import {Qty} from './store'
+import Qty from 'js-quantities'
 
 interface Item {
 	iid: string,
@@ -30,9 +30,12 @@ export interface Recipe extends RecipeSchema {
 }
 
 export function parseRecipe(schema: RecipeSchema): Recipe {
-	schema.ingredients = <Ingredient[]>schema.ingredients.map((i) => ({
-		...i,
-		qty: Qty(i.scalar, i.unit)
-	}))
-	return <Recipe>schema
+	const recipe: Recipe = {
+		...schema,
+		ingredients: <Ingredient[]>schema.ingredients.map((i) => ({
+			...i,
+			qty: new Qty(i.scalar, i.unit),
+		}))
+	}
+	return recipe
 }

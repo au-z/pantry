@@ -1,11 +1,14 @@
 
-function DOM(el: HTMLElement | string, properties: Object, children?: HTMLElement[]) {
+function DOM(el: HTMLElement | string, properties: Object, children?: (HTMLElement | string)[]) {
 	if(typeof el === 'string') el = document.createElement(el)
 	Object.entries(properties).forEach(([key, value]) => {
-		if(el[key] !== undefined) el[key] = value
-		else((<HTMLElement>el).setAttribute(key, value))
+		el[key] = value
 	})
-	children?.forEach((child) => (<HTMLElement>el).appendChild(child))
+	console.log(el)
+	children?.forEach((child: any) => {
+		if(typeof child === 'string') child = document.createTextNode(child);
+		(<HTMLElement>el).appendChild(child)
+	})
 	return el
 }
 

@@ -1,13 +1,25 @@
 import {define, html, Hybrids, property} from 'hybrids'
+import QTY from 'js-quantities'
 import {Element} from './main'
-import Qty from 'js-quantities'
 
 import styles from './app-qty.css'
 
+export interface hQty extends HTMLElement {
+	scalar: number,
+	unit: string,
+	qty: QTY,
+}
+
+export const QtyProperties: Hybrids<hQty> = {
+	scalar: 1,
+	unit: 'm',
+	qty: ({scalar, unit}) => new QTY(scalar, unit),
+}
+
 const AppQty: Hybrids<Element> = {
-	qty: property(Qty.parse('1 meter')),
+	...QtyProperties,
 	render: ({qty}) => html`
-		<small class="app-qty">${qty.scalar} ${qty._units}</small>
+		<small class="app-qty">${qty}</small>
 	`.style(styles)
 }
 

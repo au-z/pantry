@@ -1,55 +1,44 @@
-import {store} from 'hybrids'
-import {produce} from 'immer'
 import {recipes} from './recipe'
 import {parseRecipe} from './domain'
-import QTY from 'js-quantities'
+import Qty from 'js-quantities'
+(window as any).Qty = Qty
 
 type Option<T> = T | null
 
-export interface Qty {
-	scalar: number,
-	baseScalar: number,
-	isBase: boolean,
-	initValue: string,
-	[key: string]: any,
-}
-
-export function Qty(qty: number | string, unit?: string): Qty {
-	return (typeof qty === 'string') ? QTY.parse(qty) : new QTY(qty, unit)
-}
-
-interface Stock extends Qty {iid: string}
+interface Stock {iid: string, qty: Qty}
 
 const regexWord = /\w+/g
 
 export const PantryStore = {
 	recipes: recipes.map((r) => parseRecipe(r)),
+	recipe: ({recipes}) => (name) => recipes.find((r) => r.name === name),
 	selectedRecipe: ({recipes}) => (i) => recipes[i],
 	stock: ({pantry}) => (iid: string): Option<Stock> => {
 		let node = pantry
-		let stock
+		let stock: Option<Stock>
 		let match
 		while(match = regexWord.exec(iid)) {
 			node = node[match[0]]
-			if(node?.scalar) stock = {...node, iid}
+			if(node['scalar']) stock = {iid, qty: <Qty>node}
 		}
 		return stock
 	},
-	inStock: ({pantry}) => (iid: string, qty: Qty): boolean => {
-		const existing = pantry.stock(iid)
-		return false
-		// return existing?.convert(measure.unit) > Qty(measure.qty, measure.unit)
+	remaining: ({pantry, stock}) => (iid: string, qty: Qty): Qty => {
+		const existing: Stock = stock(iid)
+		return !existing ?
+			qty.mul(-1) : existing.qty.gte(qty) ?
+				existing.qty.sub(qty) : qty.sub(existing.qty).mul(-1)
 	},
-	pantry: {
+	pantry: () => ({
 		flour: {
-			wheat: Qty('2 cups'),
-			all_purpose: Qty('2 cups'),
+			wheat: Qty('1 cu'),
+			all_purpose: Qty('2 cu'),
 		},
 		yeast: {
-			active_dry: Qty('3 oz'),
+			active_dry: Qty('6 tsp'),
 		},
-		salt: Qty('32 oz'),
-		water: Qty('1000000000000 cups'),
-	},
+		salt: Qty('32 floz'),
+		water: Qty('1000000000000 floz'),
+	}),
 }
 

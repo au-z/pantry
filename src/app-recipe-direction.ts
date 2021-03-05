@@ -18,14 +18,13 @@ function parseIngredients(host, node) {
 		let text = node.textContent
 		while(match = tokenizer.exec(node.textContent)) {
 			const [prefix, suffix] = text.split(match[0]).map((text) => document.createTextNode(text))
-			
+
 			let data = host.ingredients.find((i) => i.iid === match[1])
 			if(match[2]) {
 				data = {...data, frac: parseFloat(match[2])}
 			}
-			const ingredient: Element = DOM('app-ingredient', {...data}, [
-				DOM('app-qty', {...data})
-			])
+			const {iid, name, scalar, unit} = data
+			const ingredient: Element = DOM('app-ingredient', {iid, name, scalar, unit, inline: true})
 
 			replacements.pop()
 			replacements.push(prefix, ingredient, suffix)

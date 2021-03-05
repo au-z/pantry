@@ -1,4 +1,3 @@
-import QTY from 'js-quantities'
 import {Qty} from './store'
 
 const pantry = {

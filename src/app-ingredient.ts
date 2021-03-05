@@ -1,46 +1,63 @@
-import {children, define, html, Hybrids} from 'hybrids'
+import {children, define, dispatch, html, Hybrids, property, store} from 'hybrids'
 import {Element} from './main'
 import styles from './app-ingredient.css'
+import { PantryStore } from './store'
+import { QtyProperties } from './app-qty'
 
 function updateMeasure(host, e) {
 	host.frac = e.detail.frac
 }
 
-const ModVia: Hybrids<Element> = {
-	kind: '',
-	color: 'ffffff',
-	render: ({kind, color}) => html`<div class="mod-via ${kind}" style="background: #${color};"></div>
-	
+const AppIcon: Hybrids<Element> = {
+	error: false,
+	warn: false,
+	slot: false,
+	rgb: (host) =>
+		host.slot ? '150, 150, 239' :
+		host.error ? '239, 71, 111' :
+		host.warn ? '255, 209, 102' :
+		'white',
+	render: (host) => html`
+		${!host.slot && html`
+			${host.warn && html`<span>&#9888;</span>`}
+			${host.error && html`<span>&#9888;</span>`}
+		`}
+		<slot></slot>
 	<style>
 		:host {
-			line-height: 0;
+			padding: 1px 6px;
+			border: 1px solid rgba(${host.rgb}, 0.4);
+			background: rgba(${host.rgb}, 0.1);
 		}
-
-		.mod-via {
-			width: 8px;
-			height: 8px;
-			border-radius: 8px;
+		span {
+			color: rgba(${host.rgb}, 1);
 		}
 	</style>`
 }
 
 const AppIngredient: Hybrids<Element> = {
-	id: '',
+	iid: '',
 	name: '',
 	frac: 1,
-	render: ({measure, id, name, frac}) => html`<div data-id="${id}">
-		${JSON.stringify(measure)}
-		<div class="mods">
-			${frac !== 1 && html`<mod-via kind="border" color="ff0000"></mod-via>`}
-			${frac !== 1 && html`<mod-via kind="border" color="00ff00"></mod-via>`}
-			${frac !== 1 && html`<mod-via kind="border" color="0000ff"></mod-via>`}
-			${frac !== 1 && html`<mod-via kind="border" color="ffff00"></mod-via>`}
-		</div>
-		<div class="content">
+	inline: false,
+	...QtyProperties,
+	store: store(PantryStore),
+	remaining: {
+		get: ({iid, store, qty}) => store.remaining(iid, qty),
+		observe: (host, detail) => detail.scalar < 0 &&
+			dispatch(host, 'out-of-stock', {detail, bubbles: true, composed: true}),
+	},
+	inStock: ({remaining}) => remaining?.scalar > 0,
+	render: ({measure, iid, name, frac, inline, qty, remaining}) => html`
+		<div class="${{inline, 'app-ingredient': true}}" data-id="${iid}">
 			<span>${name}</span>
-			<slot onmeasure="${updateMeasure}"></slot>
+			<div class="info">
+				<app-icon slot><small>${qty}</small></app-icon>
+				${!inline && remaining?.scalar === 0 && html`<app-icon warn></app-icon>`}
+				${!inline && remaining?.scalar < 0 && html`<app-icon error></app-icon>`}
+			</div>
 		</div>
-	</div>`.define({ModVia}).style(styles)
+	`.define({AppIcon}).style(styles)
 }
 
 define('app-ingredient', AppIngredient)
