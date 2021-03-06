@@ -1,0 +1,5 @@
+.app-pantry {
+	font-family: var(--font);
+	@apply h-full pt-6;
+	background: rgba(var(--app-background-color, 0, 0, 0), 1);
+}

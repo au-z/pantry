@@ -1,6 +1,6 @@
 article.recipe {
 	font-family: var(--font);
-	display: grid;
+	@apply h-full grid;
 	grid-template-columns: 1fr auto;
 	grid-template-rows: auto 1fr;
 	grid-template-areas:

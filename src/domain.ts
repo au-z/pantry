@@ -1,4 +1,4 @@
-import Qty from 'js-quantities'
+import Qty from 'js-quantities/esm'
 
 interface Item {
 	iid: string,

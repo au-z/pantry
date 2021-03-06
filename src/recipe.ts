@@ -16,7 +16,7 @@ const recipes = [
 			"Preheat dutch oven at 425F.",
 			"Flour a surface and gently form dough into a ball shape.",
 			"Place in pre-heated dutch oven.",
-			"Bake 30 mins covered, remove lid, then rbake for another 10 mins.",
+			"Bake 30 mins covered, remove lid, then bake for another 10 mins.",
 		]
 	}
 ]

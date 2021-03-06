@@ -1,5 +1,5 @@
 import {define, html, Hybrids, property} from 'hybrids'
-import QTY from 'js-quantities'
+import Qty from 'js-quantities/esm'
 import {Element} from './main'
 
 import styles from './app-qty.css'
@@ -7,13 +7,13 @@ import styles from './app-qty.css'
 export interface hQty extends HTMLElement {
 	scalar: number,
 	unit: string,
-	qty: QTY,
+	qty: Qty,
 }
 
 export const QtyProperties: Hybrids<hQty> = {
 	scalar: 1,
 	unit: 'm',
-	qty: ({scalar, unit}) => new QTY(scalar, unit),
+	qty: ({scalar, unit}) => new Qty(scalar, unit),
 }
 
 const AppQty: Hybrids<Element> = {

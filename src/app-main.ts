@@ -20,8 +20,8 @@ define('app-text', {
 } as Hybrids<Element>)
 
 const {RouterOutlet, push} = Router([
-	{path: '/pantry', template: () => html`
-		<app-text text="pantry"></app-text>
+	{path: '/pantry', default: true, template: () => html`
+		<app-pantry></app-pantry>
 	`},
 	{path: '/recipe/:id', template: ({id}) => html`
 		<recipe-viewer></recipe-viewer>
@@ -37,7 +37,7 @@ const AppMain: Hybrids<Element> = {
 				<a onclick="${push('/pantry', {text: 'clicked'})}">
 					<h3>Pantry</h3>
 				</a>
-				<a onclick="${push('/recipe', {id: 0})}">
+				<a onclick="${push('/recipe/0')}">
 					<h3>Recipe</h3>
 				</a>
 			</nav>

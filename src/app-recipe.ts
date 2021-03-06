@@ -1,9 +1,9 @@
 import {define, html, Hybrids, store} from 'hybrids'
-import styles from './app-recipe.css'
-import AppRecipeDirection from './app-recipe-direction'
+import Qty from 'js-quantities/esm'
 import {Element} from './main'
 import { PantryStore } from './store'
-import Qty from 'js-quantities'
+import AppRecipeDirection from './app-recipe-direction'
+import styles from './app-recipe.css'
 
 const AppRecipe: Hybrids<Element> = {
 	recipe: {},
@@ -21,6 +21,7 @@ const AppRecipe: Hybrids<Element> = {
 			<h1>${recipe.name}</h1>
 			<p>${recipe.description}</p>
 		</section>
+
 		<section class="ingredients">
 			<h3>Ingredients</h3>
 			${list.length > 0 && html`
@@ -36,6 +37,7 @@ const AppRecipe: Hybrids<Element> = {
 				</li>`)}
 			</ul>
 		</section>
+
 		<section class="method">
 			<h2>Directions</h2>
 			<ol>
@@ -45,7 +47,7 @@ const AppRecipe: Hybrids<Element> = {
 				</li>`)}
 			</ol>
 		</section>
-	</article>`.style(styles).define({AppRecipeDirection}),
+	</article>`.define({AppRecipeDirection}).style(styles),
 }
 
 define('app-recipe', AppRecipe)

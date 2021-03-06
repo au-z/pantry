@@ -1,6 +1,6 @@
 import {recipes} from './recipe'
 import {parseRecipe} from './domain'
-import Qty from 'js-quantities'
+import Qty from 'js-quantities/esm'
 (window as any).Qty = Qty
 
 type Option<T> = T | null
@@ -30,6 +30,9 @@ export const PantryStore = {
 				existing.qty.sub(qty) : qty.sub(existing.qty).mul(-1)
 	},
 	pantry: () => ({
+		nuts: {
+			walnut: Qty('2 cu'),
+		},
 		flour: {
 			wheat: Qty('1 cu'),
 			all_purpose: Qty('2 cu'),
@@ -39,6 +42,14 @@ export const PantryStore = {
 		},
 		salt: Qty('32 floz'),
 		water: Qty('1000000000000 floz'),
+		foo: {
+			boom: {
+				town: Qty('1 km'),
+			},
+			bar: {
+				baz: Qty('1 km'),
+			},
+		},
 	}),
 }
 

@@ -1,12 +1,8 @@
-import {children, define, dispatch, html, Hybrids, property, store} from 'hybrids'
+import {define, dispatch, html, Hybrids, store} from 'hybrids'
 import {Element} from './main'
 import styles from './app-ingredient.css'
 import { PantryStore } from './store'
 import { QtyProperties } from './app-qty'
-
-function updateMeasure(host, e) {
-	host.frac = e.detail.frac
-}
 
 const AppIcon: Hybrids<Element> = {
 	error: false,
@@ -48,7 +44,7 @@ const AppIngredient: Hybrids<Element> = {
 			dispatch(host, 'out-of-stock', {detail, bubbles: true, composed: true}),
 	},
 	inStock: ({remaining}) => remaining?.scalar > 0,
-	render: ({measure, iid, name, frac, inline, qty, remaining}) => html`
+	render: ({iid, name, inline, qty, remaining}) => html`
 		<div class="${{inline, 'app-ingredient': true}}" data-id="${iid}">
 			<span>${name}</span>
 			<div class="info">

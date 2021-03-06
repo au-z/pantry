@@ -1,4 +1,4 @@
-import {define, dispatch, html, Hybrids, property, store} from 'hybrids'
+import {define, dispatch, Hybrids, property, store} from 'hybrids'
 import {Element} from './main'
 import { PantryStore } from './store'
 

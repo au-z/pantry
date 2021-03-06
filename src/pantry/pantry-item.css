@@ -1,0 +1,4 @@
+.pantry-item {
+	font-family: var(--font);
+	@apply ml-2 pl-2;
+}

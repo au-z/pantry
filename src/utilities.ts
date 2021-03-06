@@ -4,7 +4,6 @@ function DOM(el: HTMLElement | string, properties: Object, children?: (HTMLEleme
 	Object.entries(properties).forEach(([key, value]) => {
 		el[key] = value
 	})
-	console.log(el)
 	children?.forEach((child: any) => {
 		if(typeof child === 'string') child = document.createTextNode(child);
 		(<HTMLElement>el).appendChild(child)
