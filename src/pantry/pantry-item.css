@@ -1,4 +1,12 @@
 .pantry-item {
+	@apply flex justify-between mt-2 rounded-lg;
+	margin-left: var(--pantry-indent-size, 0.5rem);
 	font-family: var(--font);
-	@apply ml-2 pl-2;
+	border-bottom: 1px solid rgba(var(--app-text-color, white), 0.1);
+
+	app-chip:last-child {
+		@apply rounded-lg;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
 }

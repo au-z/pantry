@@ -7,7 +7,7 @@ export const PantryItem: Hybrids<Element> = {
 	name: '',
 	qty: property({}),
 	render: ({iid, name, qty}) => html`<div class="pantry-item">
-		<label title="${iid}">${name}</label>
-		&nbsp;<small>${qty}</small>
+		<label title="${iid}">${name.replace('_', ' ')}</label>
+		&nbsp;<app-chip slot>${qty}</app-chip>
 	</div>`.style(styles)
 }

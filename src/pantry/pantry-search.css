@@ -1,0 +1,8 @@
+cam-input::part(input) {
+	width: 100%;
+	height: 2.4rem;
+	border: none;
+	background: rgba(255, 255, 255, 0.1);
+	font-size: 1rem;
+	color: rgba(var(--app-text-color), 1);
+}

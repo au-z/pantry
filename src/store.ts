@@ -41,15 +41,7 @@ export const PantryStore = {
 			active_dry: Qty('6 tsp'),
 		},
 		salt: Qty('32 floz'),
-		water: Qty('1000000000000 floz'),
-		foo: {
-			boom: {
-				town: Qty('1 km'),
-			},
-			bar: {
-				baz: Qty('1 km'),
-			},
-		},
+		water: Qty('1000 gal'),
 	}),
 }
 

@@ -4,33 +4,6 @@ import styles from './app-ingredient.css'
 import { PantryStore } from './store'
 import { QtyProperties } from './app-qty'
 
-const AppIcon: Hybrids<Element> = {
-	error: false,
-	warn: false,
-	slot: false,
-	rgb: (host) =>
-		host.slot ? '150, 150, 239' :
-		host.error ? '239, 71, 111' :
-		host.warn ? '255, 209, 102' :
-		'white',
-	render: (host) => html`
-		${!host.slot && html`
-			${host.warn && html`<span>&#9888;</span>`}
-			${host.error && html`<span>&#9888;</span>`}
-		`}
-		<slot></slot>
-	<style>
-		:host {
-			padding: 1px 6px;
-			border: 1px solid rgba(${host.rgb}, 0.4);
-			background: rgba(${host.rgb}, 0.1);
-		}
-		span {
-			color: rgba(${host.rgb}, 1);
-		}
-	</style>`
-}
-
 const AppIngredient: Hybrids<Element> = {
 	iid: '',
 	name: '',
@@ -48,12 +21,11 @@ const AppIngredient: Hybrids<Element> = {
 		<div class="${{inline, 'app-ingredient': true}}" data-id="${iid}">
 			<span>${name}</span>
 			<div class="info">
-				<app-icon slot><small>${qty}</small></app-icon>
-				${!inline && remaining?.scalar === 0 && html`<app-icon warn></app-icon>`}
-				${!inline && remaining?.scalar < 0 && html`<app-icon error></app-icon>`}
+				<app-chip slot><small>${qty}</small></app-chip>
+				${!inline && remaining?.scalar === 0 && html`<app-chip warn></app-chip>`}
+				${!inline && remaining?.scalar < 0 && html`<app-chip error></app-chip>`}
 			</div>
-		</div>
-	`.define({AppIcon}).style(styles)
+		</div>`.style(styles)
 }
 
 define('app-ingredient', AppIngredient)

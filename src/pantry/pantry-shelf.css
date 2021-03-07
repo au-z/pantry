@@ -1,11 +1,22 @@
 .pantry-shelf {
+	box-sizing: border-box;
 	font-family: var(--font);
-	@apply inline-flex flex-col m-1 ml-2 p-2;
-	@apply border border-gray-800 border-solid rounded-lg;
+	@apply w-full rounded-sm p-1;
+	padding-left: var(--pantry-indent-size, 1rem);
 
-	label {
-		@apply pb-2;
-		font-size: 1.4rem;
-		letter-spacing: 0.1rem;
+	.header {
+		@apply flex items-center;
+		margin-left: calc(-1 * var(--pantry-indent-size, 1rem));
+		cam-icon::part(icon) {
+			font-size: 1rem;
+			margin-right: 0.5rem;
+		}
+
+		label {
+			@apply flex font-light;
+			text-transform: uppercase;
+			opacity: 0.5;
+			letter-spacing: 0.2rem;
+		}
 	}
 }
