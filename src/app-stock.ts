@@ -1,15 +1,11 @@
-import {define, dispatch, Hybrids, property, store} from 'hybrids'
-import {Element} from './main'
-import { PantryStore } from './store'
+import { define, dispatch, property, store } from 'hybrids'
+import { PantryStore } from './store.js'
 
-const AppStock: Hybrids<Element> = {
+export const AppStock = define<any>('app-stock', {
 	store: store(PantryStore),
 	ingredient: property({}),
 	stock: {
 		get: ({store, ingredient}) => store.stock(ingredient.iid),
 		observe: (host, detail) => dispatch(host, 'lookup', {detail, bubbles: true, composed: true}),
 	},
-}
-
-define('app-stock', AppStock)
-export default AppStock
+})

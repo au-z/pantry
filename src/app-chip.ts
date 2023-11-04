@@ -1,7 +1,7 @@
 import { define, html, Hybrids } from 'hybrids';
-import {Element} from './main'
+import {Element} from './main.js'
 
-const AppChip: Hybrids<Element> = {
+export const AppChip = define<any>('app-chip', {
 	error: false,
 	warn: false,
 	slot: false,
@@ -26,7 +26,4 @@ const AppChip: Hybrids<Element> = {
 			color: rgba(${host.rgb}, 1);
 		}
 	</style>`
-}
-
-define('app-chip', AppChip)
-export default AppChip
+})

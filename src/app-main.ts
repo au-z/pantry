@@ -1,53 +1,34 @@
-import {define, html, Hybrids, store} from 'hybrids'
-import {Element} from './main'
-import {PantryStore} from './store'
+import { define, html, Hybrids, store } from 'hybrids'
+import { Element } from './main.js'
+import { PantryStore } from './store.js'
 
-import styles from './app-main.css'
-import Router from './router'
+import styles from './app-main.css?inline'
 
 define('recipe-viewer', {
-	store: store(PantryStore),
-	id: 0,
-	recipe: ({id, store}) => store.recipes[id],
-	render: ({recipe}) => recipe && html`
-		<app-recipe recipe="${recipe}"></app-recipe>
-	`,
+  store: store(PantryStore),
+  id: 0,
+  recipe: ({ id, store }) => store.recipes[id],
+  render: ({ recipe }) => recipe && html` <app-recipe recipe="${recipe}"></app-recipe> `,
 } as Hybrids<Element>)
 
 define('app-text', {
-	text: '',
-	render: ({text}) => html`${text}`,
+  text: '',
+  render: ({ text }) => html`${text}`,
 } as Hybrids<Element>)
 
-const {RouterOutlet, push} = Router([
-	{path: '/pantry', default: true, template: () => html`
-		<app-pantry></app-pantry>
-	`},
-	{path: '/recipe/:id', template: ({id}) => html`
-		<recipe-viewer></recipe-viewer>
-	`},
-])
+export const AppMain = define<any>('app-main', {
+  store: store(PantryStore),
+  render: ({ store, activeRoute }) =>
+    html`
+      <header class="flex">
+        ${JSON.stringify(activeRoute)}
+        <nav>
+        </nav>
+      </header>
 
-const AppMain: Hybrids<Element> = {
-	store: store(PantryStore),
-	render: ({store, activeRoute}) => html`
-		<header class="flex">
-			${JSON.stringify(activeRoute)}
-			<nav>
-				<a onclick="${push('/pantry', {text: 'clicked'})}">
-					<h3>Pantry</h3>
-				</a>
-				<a onclick="${push('/recipe/0')}">
-					<h3>Recipe</h3>
-				</a>
-			</nav>
-		</header>
-
-		<main>
-			<router-outlet></router-outlet>
-		</main>
-	`.define({RouterOutlet}).style(styles)
-}
-
-define('app-main', AppMain)
-export default AppMain
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    `
+      .style(styles),
+})

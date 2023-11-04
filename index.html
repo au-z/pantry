@@ -6,6 +6,8 @@
     <title>Pantry</title>
     <script type="module" src="/src/main.ts"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="module" src="node_modules/router-slot"></script>
+    <base href="/">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
       body {
@@ -22,8 +24,35 @@
         letter-spacing: 0.04em;
       }
     </style>
+    <base href="/">
   </head>
   <body>
-    <app-main></app-main>
+    <router-slot></router-slot>
+
+    <script>
+      (async () => {
+        customElements.whenDefined('router-slot').then(configRouter)
+      })()
+
+      async function configRouter() {
+        // assign router-slot to element
+        const router = document.querySelector('router-slot')
+        console.log(router)
+        await router.add([
+          {
+            path: 'pantry',
+            component: () => import('./views/pantry')
+          },
+          // {
+          //   path: 'recipes',
+          //   component: () => import('./views/recipe')
+          // },
+          // {
+          //   path: '*',
+          //   redirectTo: 'home'
+          // }
+        ])
+      }
+    </script>
   </body>
 </html>

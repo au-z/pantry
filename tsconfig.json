@@ -1,9 +1,17 @@
 {
-	"compilerOptions": {
-		"module": "esnext",
-		"target": "esnext",
-		"moduleResolution": "node",
-		"allowSyntheticDefaultImports": true,
-		"types": ["vite/client", "node"]
-	}
+  "compilerOptions": {
+    "module": "NodeNext",
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "nodenext",
+    "resolveJsonModule": true,
+    "typeRoots": ["node_modules/@types"],
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "references": [{"path": "../../libs/ducks"}],
+  "include": ["src/**/*.ts"]
 }

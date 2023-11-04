@@ -1,7 +1,6 @@
-import {define, html, Hybrids, property} from 'hybrids'
-import {Element} from './main'
+import { define, html } from 'hybrids'
 
-const AppFilterable: Hybrids<Element> =  {
+export const AppFilterable = define<any>('app-filterable', {
 	event: 'filter',
 	match: '',
 	filtered: false,
@@ -25,7 +24,4 @@ const AppFilterable: Hybrids<Element> =  {
 			height: auto;
 		}
 	</style>`
-}
-
-define('app-filterable', AppFilterable)
-export default AppFilterable
+})

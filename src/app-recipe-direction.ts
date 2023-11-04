@@ -1,16 +1,26 @@
-import {define, html, Hybrids} from 'hybrids'
-import {Element} from './main'
-import {DOM} from './utilities'
-import AppIngredient from './app-ingredient'
-import AppQty from './app-qty'
+import { define, html } from 'hybrids'
+import './app-ingredient.js'
+import './app-qty.js'
+import { Element } from './main.js'
+import { DOM } from './utilities.js'
 
-/**
- * Parses tokens from recipe directions. Supports taxonomic ingredient ids and fractional modifiers.
- * Ex. ${flour.wheat:0.5} => ['${flour.wheat:0.5}', 'flour.wheat', '0.5']
- */
-const tokenizer = /\$\{(?:([\w\.]+)(?:\:([\d\.]+)?)?)\}/g
+export const AppRecipeDirection = define<any>('app-recipe-direction', {
+	text: '',
+	ingredients: [],
+	render: ({text}) => html`<span>${text}</span>`,
+	root: {
+		get: ({render}) => render(),
+		observe: parseIngredients,
+	},
+})
 
 function parseIngredients(host, node) {
+	/**
+	 * Parses tokens from recipe directions. Supports taxonomic ingredient ids and fractional modifiers.
+	 * Ex. ${flour.wheat:0.5} => ['${flour.wheat:0.5}', 'flour.wheat', '0.5']
+	 */
+	const tokenizer = /\$\{(?:([\w\.]+)(?:\:([\d\.]+)?)?)\}/g
+
 	let next = node
 	if(node.nodeType === node.TEXT_NODE) {
 		let replacements = []
@@ -36,16 +46,3 @@ function parseIngredients(host, node) {
 	}
 	next.childNodes?.forEach((node) => parseIngredients(host, node))
 }
-
-const AppRecipeDirection: Hybrids<Element> = {
-	text: '',
-	ingredients: [],
-	render: ({text}) => html`<span>${text}</span>`.define({AppIngredient, AppQty}),
-	root: {
-		get: ({render}) => render(),
-		observe: parseIngredients,
-	},
-}
-
-define('app-recipe-direction', AppRecipeDirection)
-export default AppRecipeDirection

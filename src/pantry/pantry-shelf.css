@@ -1,11 +1,14 @@
+@import '../css/mixins.css';
+
 .pantry-shelf {
 	box-sizing: border-box;
 	font-family: var(--font);
-	@apply w-full rounded-sm p-1;
+	@mixin wh 100%, auto;
+	padding: 0.25rem;
 	padding-left: var(--pantry-indent-size, 1rem);
 
 	.header {
-		@apply flex items-center;
+		@mixin flexy left, center;
 		margin-left: calc(-1 * var(--pantry-indent-size, 1rem));
 		cam-icon::part(icon) {
 			font-size: 1rem;
@@ -13,7 +16,8 @@
 		}
 
 		label {
-			@apply flex font-light;
+			display: flex;
+			font-weight: light;
 			text-transform: uppercase;
 			opacity: 0.5;
 			letter-spacing: 0.2rem;

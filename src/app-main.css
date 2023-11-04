@@ -1,3 +1,5 @@
+@import './css/mixins.css';
+
 :host {
 	display: grid;
 	grid-template-rows: auto 1fr;
@@ -8,7 +10,7 @@ header {
 	font-family: var(--font, sans-serif);
 	background: rgba(var(--app-background-color, 0, 0, 0), 0.97);
 	nav {
-		@apply flex justify-around;
+		@mixin flexy space-around, center;
 	}
 }
 

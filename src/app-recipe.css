@@ -1,6 +1,7 @@
 article.recipe {
 	font-family: var(--font);
-	@apply h-full grid;
+	height: 100%;
+	display: grid;
 	grid-template-columns: 1fr auto;
 	grid-template-rows: auto 1fr;
 	grid-template-areas:
@@ -35,12 +36,16 @@ article.recipe > section.method {
 }
 
 blockquote.banner {
-	@apply m-0 p-1 border border-solid rounded-lg;
-	border-color: rgba(var(--app-warn-color, 255, 255, 0), 1);
+	margin: 0;
+	padding: 0.25rem;
+	boder: 1px solid rgba(var(--app-warn-color, 255, 255, 0), 1);
+	border-radius: 1rem;
 	background: rgba(var(--app-warn-color, 255, 255, 0), 0.2);
 
 	button {
-		@apply border-0 ml-4 rounded-lg;
+		border: none;
+		margin-left: 1rem;
+		border-radius: 1rem;
 		padding: 0.5rem 1rem;
 		background: rgba(var(--app-background-color, 0, 0, 0), 1);
 		color: rgba(var(--app-text-color, 0, 0, 0), 1);

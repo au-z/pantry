@@ -1,28 +1,32 @@
+@import './css/mixins.css';
+
 .app-ingredient {
-	@apply flex justify-between mt-4 border;
+	@mixin flexy space-between, center;
 	border-bottom: 1px solid rgba(var(--app-text-color, white), 0.1);
 	grid-template-columns: 100% auto;
 
 	&.inline {
-		@apply inline-flex m-0 border-0;
+		@mixin flexy;
+		display: inline-flex;
+		margin: 0;
+		border: 0;
 	}
 
 	& > app-icon:last-child {
-		@apply rounded-lg;
+		border-radius: 1rem;
 		border-top-left-radius: 0;
 		border-bottom-left-radius: 0;
 	}
 }
 
 span {
-	@apply block pr-2;
+	display: block;
 }
 
 .info {
-	@apply inline-flex;
+	display: inline-flex;
 }
 
-/* @apply rounded-md; */
 app-icon:first-of-type {
 	display: inline-flex;
 }

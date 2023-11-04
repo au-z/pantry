@@ -1,10 +1,9 @@
-import {define, dispatch, html, Hybrids, store} from 'hybrids'
-import {Element} from './main'
+import { define, dispatch, html, store } from 'hybrids'
 import styles from './app-ingredient.css'
-import { PantryStore } from './store'
-import { QtyProperties } from './app-qty'
+import { QtyProperties } from './app-qty.js'
+import { PantryStore } from './store.js'
 
-const AppIngredient: Hybrids<Element> = {
+export const AppIngredient = define<any>('app-ingredient', {
 	iid: '',
 	name: '',
 	frac: 1,
@@ -26,7 +25,4 @@ const AppIngredient: Hybrids<Element> = {
 				${!inline && remaining?.scalar < 0 && html`<app-chip error></app-chip>`}
 			</div>
 		</div>`.style(styles)
-}
-
-define('app-ingredient', AppIngredient)
-export default AppIngredient
+})
