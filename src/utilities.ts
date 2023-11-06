@@ -1,5 +1,5 @@
 /**
- *
+ * DOM helper function
  * @param el type of element to create
  * @param properties the attributes of the object
  * @param children children to append

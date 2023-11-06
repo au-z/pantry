@@ -1,11 +1,13 @@
-import {defineConfig} from 'vite'
-import CssHmr from './build/rollup-plugin-css-hmr.js'
+import { defineConfig } from 'vite'
+import CssHmr from 'rollup-plugin-css-hmr'
 
 export default defineConfig({
-	plugins: [
-		{
-			...CssHmr('.ts'),
-			enforce: 'post',
-		}
-	],
+  plugins: [
+    {
+      ...CssHmr({
+        '*': {},
+      }),
+      enforce: 'post',
+    },
+  ],
 })
