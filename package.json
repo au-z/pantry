@@ -38,6 +38,7 @@
     }
   },
   "devDependencies": {
+    "@auzmartist/hybrids-helpers": "^0.4.2",
     "@types/js-quantities": "^1.6.5",
     "@types/node": "^20.8.7",
     "autoprefixer": "^10.4.16",
@@ -51,7 +52,7 @@
   "dependencies": {
     "@auzmartist/cam-el": "../../../lib/cam-el",
     "@auzmartist/ducks": "../../libs/ducks",
-    "hybrids": "^8.2.5",
+    "hybrids": "^8.2.14",
     "js-quantities": "^1.8.0",
     "lunr": "^2.3.9",
     "router-slot": "^1.5.5"

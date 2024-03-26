@@ -1,9 +1,11 @@
-import { define, dispatch, property, store } from 'hybrids'
+import { define, dispatch, store } from 'hybrids'
+import { getset } from '@auzmartist/hybrids-helpers'
 import { PantryStore } from './store.js'
 
-export const AppStock = define<any>('app-stock', {
+export const AppStock = define<any>({
+	tag: 'app-stock', 
 	store: store(PantryStore),
-	ingredient: property({}),
+	ingredient: getset({}),
 	stock: {
 		get: ({store, ingredient}) => store.stock(ingredient.iid),
 		observe: (host, detail) => dispatch(host, 'lookup', {detail, bubbles: true, composed: true}),

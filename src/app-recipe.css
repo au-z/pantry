@@ -38,7 +38,7 @@ article.recipe > section.method {
 blockquote.banner {
 	margin: 0;
 	padding: 0.25rem;
-	boder: 1px solid rgba(var(--app-warn-color, 255, 255, 0), 1);
+	border: 1px solid rgba(var(--app-warn-color, 255, 255, 0), 1);
 	border-radius: 1rem;
 	background: rgba(var(--app-warn-color, 255, 255, 0), 0.2);
 

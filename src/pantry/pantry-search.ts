@@ -1,4 +1,5 @@
-import { define, dispatch, html, property } from 'hybrids'
+import { define, dispatch, html } from 'hybrids'
+import { getset } from '@auzmartist/hybrids-helpers'
 import Qty from 'js-quantities'
 import lunr from 'lunr'
 import styles from './pantry-search.css?inline'
@@ -51,7 +52,7 @@ function initLunr(pantry) {
 
 export const PantrySearch = define<any>('pantry-search', {
   pantry: {
-    ...property({}),
+    ...getset({}),
     observe: (host, pantry) => {
       if (Object.keys(pantry).length > 0) host.lunr = initLunr(pantry)
     },
