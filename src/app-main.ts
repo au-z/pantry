@@ -1,34 +1,31 @@
-import { define, html, Hybrids, store } from 'hybrids'
-import { Element } from './main.js'
-import { PantryStore } from './store.js'
+import { define, html } from 'hybrids'
 
 import styles from './app-main.css?inline'
 
-define('recipe-viewer', {
-  store: store(PantryStore),
+define<any>({
+  tag: 'recipe-viewer',
+  store: () => ({}),
   id: 0,
   recipe: ({ id, store }) => store.recipes[id],
   render: ({ recipe }) => recipe && html` <app-recipe recipe="${recipe}"></app-recipe> `,
-} as Hybrids<Element>)
+})
 
-define('app-text', {
+define<any>({
+  tag: 'app-text',
   text: '',
   render: ({ text }) => html`${text}`,
-} as Hybrids<Element>)
+})
 
-export const AppMain = define<any>('app-main', {
-  store: store(PantryStore),
+export const AppMain = define<any>({
+  tag: 'app-main',
+  store: () => ({}),
   render: ({ store, activeRoute }) =>
     html`
       <header class="flex">
         ${JSON.stringify(activeRoute)}
-        <nav>
-        </nav>
+        <nav></nav>
       </header>
 
-      <main>
-        <router-outlet></router-outlet>
-      </main>
-    `
-      .style(styles),
+      <main></main>
+    `.style(styles),
 })

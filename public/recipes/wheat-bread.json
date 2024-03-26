@@ -1,0 +1,16 @@
+{
+  "name": "Wheat Bread",
+  "metadata": {
+    "description": "Easy wheat bread. Makes a 12 slice round loaf."
+  },
+  "steps": [
+    "In a large bowl, combine [1cu:wheat flour], [2cu:all-purpose flour], [2tsp:salt], and [0.75tsp:active dry yeast].",
+    "Mix in [2cu:water] and stir well to combine into a ball of dough.",
+    "Cover and let sit to rise for 12 to 18 hrs.",
+    "Preheat dutch oven at 425F.",
+    "Flour a surface and gently form dough into a ball shape.",
+    "Place in pre-heated dutch oven.",
+    "Bake 30 mins covered, remove lid, then bake for another 10 mins."
+  ],
+  "yield": { "quantity": 1 }
+}

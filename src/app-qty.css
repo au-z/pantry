@@ -1,13 +1,13 @@
 :host {
-	display: inline-flex;
+  display: inline-flex;
 }
 
 div.app-measure {
-	position: relative;
-	display: inline-flex;
-	flex-direction: column;
-	padding: 0 0.5rem;
-	font-weight: bold;
-	opacity: 0.5;
-	color: var(--color-measure, #fff);
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+  font-weight: bold;
+  opacity: 0.5;
+  color: var(--color-measure, #fff);
 }

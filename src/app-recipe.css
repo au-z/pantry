@@ -1,53 +1,53 @@
 article.recipe {
-	font-family: var(--font);
-	height: 100%;
-	display: grid;
-	grid-template-columns: 1fr auto;
-	grid-template-rows: auto 1fr;
-	grid-template-areas:
-		'h i'
-		'm i';
+  font-family: var(--font);
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'h i'
+    'm i';
 }
 
 article.recipe > section.header {
-	grid-area: h;
-	padding: 8px 32px;
-	background: rgba(var(--app-background-color, 0, 0, 0), 1);
+  grid-area: h;
+  padding: 8px 32px;
+  background: rgba(var(--app-background-color, 0, 0, 0), 1);
 }
 
 article.recipe > section.ingredients {
-	grid-area: i;
-	padding: 8px 32px;
-	min-width: 300px;
-	background: rgba(var(--app-background-color, 0, 0, 0), 0.97);
+  grid-area: i;
+  padding: 8px 32px;
+  min-width: 300px;
+  background: rgba(var(--app-background-color, 0, 0, 0), 0.97);
 
-	ul {
-		padding: 0;
-		li {
-			list-style: none;
-		}
-	}
+  ul {
+    padding: 0;
+    li {
+      list-style: none;
+    }
+  }
 }
 
 article.recipe > section.method {
-	grid-area: m;
-	padding: 8px 32px;
-	background: rgba(var(--app-background-color, 0, 0, 0), 1);
+  grid-area: m;
+  padding: 8px 32px;
+  background: rgba(var(--app-background-color, 0, 0, 0), 1);
 }
 
 blockquote.banner {
-	margin: 0;
-	padding: 0.25rem;
-	border: 1px solid rgba(var(--app-warn-color, 255, 255, 0), 1);
-	border-radius: 1rem;
-	background: rgba(var(--app-warn-color, 255, 255, 0), 0.2);
+  margin: 0;
+  padding: 0.25rem;
+  border: 1px solid rgba(var(--app-warn-color, 255, 255, 0), 1);
+  border-radius: 1rem;
+  background: rgba(var(--app-warn-color, 255, 255, 0), 0.2);
 
-	button {
-		border: none;
-		margin-left: 1rem;
-		border-radius: 1rem;
-		padding: 0.5rem 1rem;
-		background: rgba(var(--app-background-color, 0, 0, 0), 1);
-		color: rgba(var(--app-text-color, 0, 0, 0), 1);
-	}
+  button {
+    border: none;
+    margin-left: 1rem;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    background: rgba(var(--app-background-color, 0, 0, 0), 1);
+    color: rgba(var(--app-text-color, 0, 0, 0), 1);
+  }
 }

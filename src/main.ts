@@ -9,9 +9,9 @@ import './app-chip'
 import * as CamElements from '@auzmartist/cam-el'
 
 const components = {
-	...CamElements,
+  ...CamElements,
 }
 
 export interface Element extends HTMLElement {
-	[key: string]: any
+  [key: string]: any
 }

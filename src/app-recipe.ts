@@ -2,11 +2,15 @@ import { define, html, store } from 'hybrids'
 import Qty from 'js-quantities/esm'
 import './app-recipe-direction.js'
 import styles from './app-recipe.css?inline'
-import { PantryStore } from './store.js'
 
-export const AppRecipe = define<any>('app-recipe', {
+export const AppRecipe = define<any>({
+  tag: 'app-recipe',
   recipe: {},
-  store: store(PantryStore),
+  store: () => {
+    stock: () => {
+      throw new Error('stock not implemented')
+    }
+  },
   stock: ({ store, recipe }) => recipe.ingredients.map(({ iid }) => store.stock(iid)),
   remaining: ({ store, recipe }) =>
     recipe.ingredients.map(({ iid, scalar, unit }) => ({

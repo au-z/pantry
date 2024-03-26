@@ -1,16 +1,14 @@
-import { define, dispatch, html, Hybrids, store } from 'hybrids'
+import { define, dispatch, html } from 'hybrids'
 import { Element } from '../main.js'
-import { PantryStore } from '../store.js'
 import './pantry-search.js'
 import './pantry-shelf.js'
 import './pantry-item.js'
 
 import styles from './app-pantry.css?inline'
-import { hostname } from 'os'
+import { store } from '../state/store.js'
 
 const AppPantry: Hybrids<Element> = {
-  store: store(PantryStore),
-  pantry: ({ store }) => store.pantry,
+  pantry: () => store.state().pantry,
   results: {
     get: ({ pantry }, val = pantry) => val,
     set: (host, val) => val,
