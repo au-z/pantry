@@ -1,6 +1,5 @@
-import { define, html, Hybrids, property } from 'hybrids'
+import { define, html, Component } from 'hybrids'
 import Qty from 'js-quantities/esm'
-import { Element } from './main.js'
 
 import styles from './app-qty.css?inline'
 
@@ -10,13 +9,15 @@ export interface hQty extends HTMLElement {
   qty: Qty
 }
 
-export const QtyProperties: Hybrids<hQty> = {
+export const QtyProperties: Component<hQty> = {
+  tag: '',
   scalar: 1,
   unit: 'm',
   qty: ({ scalar, unit }) => new Qty(scalar, unit),
 }
 
-export const AppQty = define<any>('app-qty', {
+export const AppQty = define<any>({
   ...QtyProperties,
+  tag: 'app-qty',
   render: ({ qty }) => html` <small class="app-qty">${qty}</small> `.style(styles),
 })

@@ -1,4 +1,5 @@
-import { define, html, property } from 'hybrids'
+import { define, html } from 'hybrids'
+import { getset } from '@auzmartist/hybrids-helpers'
 import Qty from 'js-quantities/esm'
 import styles from './pantry-shelf.css?inline'
 
@@ -7,10 +8,11 @@ const categoriesFirst = (a, b) => (isQty(a[1]) != isQty(b[1]) ? 1 : -1)
 
 const shouldFilter = (id, { detail }) => detail.indexOf(id) < 0
 
-export const PantryShelf = define<any>('pantry-shelf', {
+export const PantryShelf = define<any>({
+  tag: 'pantry-shelf',
   ns: '',
   name: '',
-  shelf: property({}),
+  shelf: getset({}),
   render: ({ ns, name, shelf }) =>
     html`<div class="pantry-shelf">
       ${ns &&
