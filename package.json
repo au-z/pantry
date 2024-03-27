@@ -42,7 +42,7 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@auzmartist/cam-el": "../../../lib/cam-el",
     "@auzmartist/ducks": "../../libs/ducks",
-    "@auzmartist/hybrids-helpers": "^0.3.4",
+    "@auzmartist/hybrids-helpers": "^0.4.0",
     "immer": "^8.0.1",
     "js-quantities": "^1.8.0",
     "lodash": "^4.17.21"
